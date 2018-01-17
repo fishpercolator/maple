@@ -1,3 +1,10 @@
+// only add `router.base = '/maple/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/maple/'
+  }
+} : {}
+
 module.exports = {
   /*
   ** Headers of the page
@@ -37,5 +44,6 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  ...routerBase
 }
