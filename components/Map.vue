@@ -4,13 +4,13 @@
     </div>
     <div id="controls">
       <label>Colour</label><input v-model="color" type="color">
-      <div v-for="(_, name) in wardvals" :key="name">
-        <label>{{name}}</label>
-        <input v-model="wardvals[name]">
+      <div v-for="(_, name, index) in wardvals" :key="name">
+        <label :for="`input-${index}`">{{name}}</label>
+        <input :id="`input-${index}`" v-model="wardvals[name]">
       </div>
-      <button disabled v-if="downloading">Downloading...</button>
-      <button v-on:click="saveImage" v-else>Save map as image</button>
-      <button v-on:click="resetVals">Reset</button>
+      <button disabled v-if="downloading" class="button">Downloading...</button>
+      <button v-on:click="saveImage" v-else class="button button-primary">Save map as image</button>
+      <button v-on:click="resetVals" class="button">Reset</button>
     </div>
   </div>
 </template>
@@ -106,18 +106,21 @@ export default {
     height: 100vh;
   }
   #controls {
-    width: 22em;
+    width: 24em;
     height: 100vh;
     padding: 1em;
     overflow-y: auto;
     label {
       display: inline-block;
-      width: 15em;
+      width: 17em;
       text-align: right;
       margin-right: 1em;
     }
     input {
       width: 3em;
+    }
+    button {
+      margin: 0.5em;
     }
   }
 }

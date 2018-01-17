@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section>
     <Map></Map>
   </section>
 </template>
@@ -15,7 +15,10 @@ export default {
 </script>
 
 <style>
-.container {
+@import "skeleton-css/css/normalize";
+@import "skeleton-css/css/skeleton";
+
+section {
   min-height: 100vh;
   display: flex;
   justify-content: center;

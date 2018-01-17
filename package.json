@@ -18,6 +18,7 @@
   "dependencies": {
     "html2canvas": "^1.0.0-alpha.9",
     "nuxt": "^1.0.0",
+    "skeleton-css": "^2.0.4",
     "tinycolor2": "^1.4.1",
     "vue-ls": "^2.3.3"
   },
