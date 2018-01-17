@@ -8,6 +8,8 @@
         <label>{{name}}</label>
         <input v-model="wardvals[name]">
       </div>
+      <button disabled v-if="downloading">Downloading...</button>
+      <button v-on:click="saveImage" v-else>Save map as image</button>
       <button v-on:click="resetVals">Reset</button>
     </div>
   </div>
@@ -16,11 +18,13 @@
 <script>
 import wards from '~/static/wards.json'
 import tinycolor from 'tinycolor2'
+import html2canvas from 'html2canvas'
 
 export default {
   data () {
     return {
       map: null,
+      downloading: false,
       color: this.$ls.get('color', '#008000'),
       wardvals: this.$ls.get('wardvals', wards.features.reduce((o, feature) => Object.assign(o, {[feature.properties.wd16nm]: "0"}), {}))
     }
@@ -58,6 +62,19 @@ export default {
     },
     resetVals: function () {
       Object.keys(this.wardvals).forEach(key => this.wardvals[key] = 0)
+    },
+    saveImage: function () {
+      this.downloading = true
+      html2canvas(document.getElementById('map').querySelector('.gm-style > div:first-child'), {useCORS: true}).then(canvas => {
+        var image = canvas.toDataURL('image/png')
+        var link = document.createElement('a')
+        link.download = 'map.png'
+        link.href = image
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        this.downloading = false
+      })
     }
   },
   mounted () {
