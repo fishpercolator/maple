@@ -68,6 +68,13 @@ export default {
     }
     this.map = new google.maps.Map(element, options)
     this.map.data.loadGeoJson('wards.json')
+    var infowindow = new google.maps.InfoWindow()
+    this.map.data.addListener('click', function(event) {
+      var name = event.feature.getProperty('wd16nm')
+      infowindow.setContent(name)
+      infowindow.setPosition({lat: event.feature.getProperty('lat'), lng: event.feature.getProperty('long')})
+      infowindow.open(this.map)
+    })
     this.recolor(this.wardvals)
   }
 }
