@@ -2,6 +2,10 @@
 
 > Mapping tool for Leeds
 
+## Generating wardnames.json
+
+jq -c '[.features[] | .properties.wd16nm]' static/wards.json > assets/wardnames.json
+
 ## Build Setup
 
 ``` bash

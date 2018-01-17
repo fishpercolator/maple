@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import wards from '~/static/wards.json'
 import tinycolor from 'tinycolor2'
 import html2canvas from 'html2canvas'
+import wardnames from '~/assets/wardnames.json'
 
 export default {
   data () {
@@ -26,7 +26,7 @@ export default {
       map: null,
       downloading: false,
       color: this.$ls.get('color', '#008000'),
-      wardvals: this.$ls.get('wardvals', wards.features.reduce((o, feature) => Object.assign(o, {[feature.properties.wd16nm]: "0"}), {}))
+      wardvals: this.$ls.get('wardvals', wardnames.reduce((o, ward) => Object.assign(o, {[ward]: "0"}), {}))
     }
   },
   watch: {
