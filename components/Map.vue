@@ -42,9 +42,8 @@ export default {
         var color = tinycolor.mix(this.color, 'white', ((1 - (val / max)) * 100))
         return {
           fillColor: color,
-          strokeColor: color,
-          strokeWeight: 1,
-          fillOpacity: 0.6
+          strokeWeight: 0,
+          fillOpacity: 0.7,
         }
       })
     }
