@@ -1,0 +1,41 @@
+module.exports = {
+  /*
+  ** Headers of the page
+  */
+  head: {
+    title: 'maple',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: 'Mapping tool for Leeds' }
+    ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBW4M9IBxxH8OefklPBYgOMrxTHiBeZzlY' }
+    ]
+  },
+  /*
+  ** Customize the progress bar color
+  */
+  loading: { color: '#3B8070' },
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** Run ESLint on save
+    */
+    extend (config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
+  }
+}
