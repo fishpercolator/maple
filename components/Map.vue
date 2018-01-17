@@ -3,7 +3,7 @@
     <div id="map">
     </div>
     <div id="controls">
-      <label>Colour</label><input v-model="color">
+      <label>Colour</label><input v-model="color" type="color">
       <div v-for="(_, name) in wardvals" :key="name">
         <label>{{name}}</label>
         <input v-model="wardvals[name]">
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       map: null,
-      color: 'green',
+      color: '#008000',
       wardvals: wards.features.reduce((o, feature) => Object.assign(o, {[feature.properties.wd16nm]: "0"}), {})
     }
   },
@@ -65,19 +65,23 @@ export default {
 #outer {
   // FIXME: Should be two components
   display: flex;
+  width: 100%;
 }
 #map {
-  width: 60vw;
+  flex-grow: 1;
   height: 100vh;
 }
 #controls {
-  width: 40vw;
+  width: 22em;
   padding: 1em;
   label {
     display: inline-block;
     width: 15em;
     text-align: right;
     margin-right: 1em;
+  }
+  input {
+    width: 3em;
   }
 }
 </style>
