@@ -6525,6 +6525,10 @@ vue-loader@^13.6.2:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-ls@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue-ls/-/vue-ls-2.3.3.tgz#a78d62c620b8e1f30614e2dd2984eaf455e45bae"
+
 vue-meta@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/vue-meta/-/vue-meta-1.4.2.tgz#1442107969704be051df2921d9a3aeb9b0374a7d"

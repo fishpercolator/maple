@@ -1,5 +1,5 @@
 <template>
-  <div id="outer">
+  <div id="map-outer">
     <div id="map">
     </div>
     <div id="controls">
@@ -8,6 +8,7 @@
         <label>{{name}}</label>
         <input v-model="wardvals[name]">
       </div>
+      <button v-on:click="resetVals">Reset</button>
     </div>
   </div>
 </template>
@@ -20,16 +21,22 @@ export default {
   data () {
     return {
       map: null,
-      color: '#008000',
-      wardvals: wards.features.reduce((o, feature) => Object.assign(o, {[feature.properties.wd16nm]: "0"}), {})
+      color: this.$ls.get('color', '#008000'),
+      wardvals: this.$ls.get('wardvals', wards.features.reduce((o, feature) => Object.assign(o, {[feature.properties.wd16nm]: "0"}), {}))
     }
   },
   watch: {
     wardvals: {
-      handler: function () { this.recolor() },
+      handler: function (vals) {
+        this.recolor()
+        this.$ls.set('wardvals', vals)
+      },
       deep: true
     },
-    color: function () { this.recolor() }
+    color: function (col) {
+      this.recolor()
+      this.$ls.set('color', col)
+    }
   },
   methods: {
     recolor: function () {
@@ -42,10 +49,15 @@ export default {
         var color = tinycolor.mix(this.color, 'white', ((1 - (val / max)) * 100))
         return {
           fillColor: color,
-          strokeWeight: 0,
-          fillOpacity: 0.7,
+          strokeColor: 'black',
+          strokeOpacity: 0.3,
+          strokeWeight: 1,
+          fillOpacity: 0.6,
         }
       })
+    },
+    resetVals: function () {
+      Object.keys(this.wardvals).forEach(key => this.wardvals[key] = 0)
     }
   },
   mounted () {
@@ -62,26 +74,27 @@ export default {
 </script>
 
 <style lang="scss">
-#outer {
-  // FIXME: Should be two components
+#map-outer {
   display: flex;
   width: 100%;
-}
-#map {
-  flex-grow: 1;
-  height: 100vh;
-}
-#controls {
-  width: 22em;
-  padding: 1em;
-  label {
-    display: inline-block;
-    width: 15em;
-    text-align: right;
-    margin-right: 1em;
+  #map {
+    flex-grow: 1;
+    height: 100vh;
   }
-  input {
-    width: 3em;
+  #controls {
+    width: 22em;
+    height: 100vh;
+    padding: 1em;
+    overflow-y: auto;
+    label {
+      display: inline-block;
+      width: 15em;
+      text-align: right;
+      margin-right: 1em;
+    }
+    input {
+      width: 3em;
+    }
   }
 }
 </style>

@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "nuxt": "^1.0.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "vue-ls": "^2.3.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
