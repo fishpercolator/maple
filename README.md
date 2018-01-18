@@ -4,7 +4,11 @@
 
 ## Generating wardnames.json
 
-jq -c '[.features[] | .properties.wd16nm]' static/wards.json > assets/wardnames.json
+    jq -c '[.features[] | .properties.wd16nm]' static/wards.json > assets/wardnames.json
+
+## Generating postcodes.json
+
+    ruby script/convert_postcodes.rb /path/to/postcodes.csv > assets/postcodes.json
 
 ## Build Setup
 
