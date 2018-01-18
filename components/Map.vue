@@ -106,7 +106,6 @@ export default {
     height: 100vh;
   }
   #controls {
-    width: 24em;
     height: 100vh;
     padding: 1em;
     overflow-y: auto;
@@ -121,6 +120,16 @@ export default {
     }
     button {
       margin: 0.5em;
+    }
+  }
+  @media (max-width: 48em) {
+    flex-wrap: wrap;
+    #map {
+      width: 100vw;
+    }
+    #controls {
+      width: 100vw;
+      height: auto;
     }
   }
 }
