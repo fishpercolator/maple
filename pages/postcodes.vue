@@ -1,19 +1,15 @@
 <template>
   <section id="postcodes">
-    <div id="map" class="left" />
-    <div id="controls" class="right">
-      <Nav />
-      <h4>Coming soon...</h4>
-    </div>
+    <PostcodeMap />
   </section>
 </template>
 
 <script>
-import Nav from '~/components/Nav.vue'
+import PostcodeMap from '~/components/PostcodeMap.vue'
 
 export default {
   components: {
-    Nav
+    PostcodeMap
   }
 }
 </script>

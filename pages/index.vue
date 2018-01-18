@@ -1,15 +1,15 @@
 <template>
   <section id="index">
-    <Map></Map>
+    <WardMap />
   </section>
 </template>
 
 <script>
-import Map from '~/components/Map.vue'
+import WardMap from '~/components/WardMap.vue'
 
 export default {
   components: {
-    Map
+    WardMap
   }
 }
 </script>
