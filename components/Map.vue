@@ -1,8 +1,9 @@
 <template>
-  <div id="map-outer">
-    <div id="map">
+  <div id="map-outer" class="leftright">
+    <div id="map" class="left">
     </div>
-    <div id="controls">
+    <div id="controls" class="right">
+      <Nav />
       <label>Colour</label><input v-model="color" type="color">
       <div v-for="(_, name, index) in wardvals" :key="name">
         <label :for="`input-${index}`">{{name}}</label>
@@ -19,8 +20,12 @@
 import tinycolor from 'tinycolor2'
 import html2canvas from 'html2canvas'
 import wardnames from '~/assets/wardnames.json'
+import Nav from '~/components/Nav.vue'
 
 export default {
+  components: {
+    Nav
+  },
   data () {
     return {
       map: null,
@@ -99,16 +104,7 @@ export default {
 
 <style lang="scss">
 #map-outer {
-  display: flex;
-  width: 100%;
-  #map {
-    flex-grow: 1;
-    height: 100vh;
-  }
   #controls {
-    height: 100vh;
-    padding: 1em;
-    overflow-y: auto;
     label {
       display: inline-block;
       width: 17em;
@@ -120,16 +116,6 @@ export default {
     }
     button {
       margin: 0.5em;
-    }
-  }
-  @media (max-width: 48em) {
-    flex-wrap: wrap;
-    #map {
-      width: 100vw;
-    }
-    #controls {
-      width: 100vw;
-      height: auto;
     }
   }
 }

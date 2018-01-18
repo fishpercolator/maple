@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="index">
     <Map></Map>
   </section>
 </template>
@@ -15,14 +15,4 @@ export default {
 </script>
 
 <style>
-@import "skeleton-css/css/normalize";
-@import "skeleton-css/css/skeleton";
-
-section {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 </style>
