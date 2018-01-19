@@ -17,7 +17,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Mapping tool for Leeds' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }
     ],
     script: [
       { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBW4M9IBxxH8OefklPBYgOMrxTHiBeZzlY&libraries=visualization' }

@@ -14,7 +14,12 @@
           <p>The map will update as you change the values, and it auto-saves so you can close the tab and come back to it whenever you like.</p>
           <p>When you're ready, you can click the 'save map as image' button to download the map. This uses a screenshot, so make sure the map is positioned as you'd like it before you press the button.</p>
           <h3>Postcode maps</h3>
-          <p>This feature is coming soon...</p>
+          <p>A <router-link to="/postcodes">postcode map</router-link> is a heatmap that visualises a set of postcodes, showing where they are most clustered. An example (in the image below) might be the locations of pedestrian crossings.</p>
+          <img src="~assets/postcodemap.png" />
+          <p>Enter your postcodes either one per line, or separated by commas. There are also two sliders you can use to control the map: <em>Radius</em> is the size of the circle given to each postcode on the map, and <em>Max intensity</em> can put a limit on the maximum intensity of the map, in order that very strong don't nullify the rest of the map. You can play with these sliders and see how they affect your map.</p>
+          <p>When you're ready, click the 'save map as image' button to download the map. This uses a screenshot, so make sure the map is positioned as you'd like it before you press the button.</p>
+          <h3>Datasets used</h3>
+          <p>This tool uses transformations of the <a href="https://data.gov.uk/dataset/wards-december-2016-full-extent-boundaries-in-great-britain2">ONS wards data</a> and the <a href="https://data.gov.uk/dataset/leeds-post-codes">Leeds City Council postcode data</a>. The heatmap above was generated from the <a href="https://datamillnorth.org/dataset/pedestrian-crossing-points">Leeds City Council pedestrian crossing data</a>. All are licensed under an <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a> and remain the properties of their respective owners.</p>
         </div>
       </div>
       <div id="header" class="right">
@@ -60,7 +65,7 @@ export default {
   }
   #header {
     overflow: visible;
-    width: 25em;
+    min-width: 25em;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="nav-area">
-    <h2>Maple</h2>
+    <h2><img src="~assets/maple.svg" /> Maple</h2>
     <nav>
       <router-link to="/">Wards</router-link>
       <router-link to="/postcodes">Postcodes</router-link>
@@ -14,6 +14,9 @@
   text-align: center;
   h2 {
     margin-bottom: 0;
+    img {
+      height: 100%;
+    }
   }
   nav {
     margin-bottom: 1em;
