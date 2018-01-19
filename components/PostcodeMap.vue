@@ -38,7 +38,8 @@ export default {
       map: null,
       heatmap: null,
       radius: this.$ls.get('radius', 30),
-      maxIntensity: this.$ls.get('maxIntensity', 0)
+      maxIntensity: this.$ls.get('maxIntensity', 0),
+      downloading: false
     }
   },
   computed: {
