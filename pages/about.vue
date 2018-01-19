@@ -6,7 +6,7 @@
           <h2>Maple <small><strong>- Map</strong>ping <strong>Le</strong>eds</small></h2>
           <p>Maple is a tool for quickly generating maps representing data in Leeds.</p>
           <p>It can generate two types of maps - ward maps and postcode maps.</p>
-          <p>Maple was commissioned by <a href="http://www.opforum.org.uk/">Leeds Older People's Forum</a> and developed by <a href="https://www.fishpercolator.co.uk/">Fish Percolator</a> using <a href="https://vuejs.org/">Vue.js</a>.</p>
+          <p>Maple was commissioned by <a href="https://timetoshineleeds.org/">Time to Shine</a> and developed by <a href="https://www.fishpercolator.co.uk/">Fish Percolator</a> using <a href="https://vuejs.org/">Vue.js</a>.</p>
           <h3>Ward maps</h3>
           <p>A <router-link to="/">ward map</router-link> allows you to visualise any numeric dataset with values for each ward in Leeds. Examples of such datasets include things like spending, vote shares, number of people...</p>
           <p>Simply choose a colour and fill your values in. The brightest intensity will be given to the ward with the largest value in your dataset, and then other wards will be given an intensity proportional to that value.</p>
