@@ -1,10 +1,25 @@
 <template>
-  <div id="map-outer" class="leftright">
+  <div id="postcodemap" class="leftright">
     <div id="map" class="left">
     </div>
     <div id="controls" class="right">
       <Nav />
-      <textarea v-model="postcodes" id="entry" />
+      <div id="sliders">
+        <div class="slider">
+          <label for="radius">Radius</label>
+          <input v-model="radius" id="radius" type="range" min="1" max="100" />
+        </div>
+        <div class="slider">
+          <label for="maxIntensity">Max intensity</label>
+          <input v-model="maxIntensity" id="maxIntensity" type="range" min="0" max="100" />
+        </div>
+      </div>
+      <textarea v-model="postcodes" id="entry" placeholder="Leeds postcodes, one per line or separated by commas..."/>
+      <div id="buttons">
+        <button disabled v-if="downloading" class="button">Downloading...</button>
+        <button v-on:click="saveImage" v-else class="button button-primary">Save map as image</button>
+        <button v-on:click="reset" class="button">Reset</button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,36 +34,42 @@ export default {
   },
   data () {
     return {
-      postcodes: "",
-      markers: [],
-      map: null
+      postcodes: this.$ls.get('postcodes', ''),
+      map: null,
+      heatmap: null,
+      radius: this.$ls.get('radius', 30),
+      maxIntensity: this.$ls.get('maxIntensity', 0)
     }
   },
   computed: {
     latlngs () {
       let postcodes = this.postcodes.split(/[\n,]\s*/)
-      console.log(postcodes)
-      return postcodes.map(p => p2ll[p.replace(/ /, '')]).filter(ll => ll != undefined)
+      return postcodes.map(p => p2ll[p.replace(/ /, '')]).filter(ll => ll != undefined).map(ll => new google.maps.LatLng(...ll))
     }
   },
   watch: {
-    postcodes () {
-      this.redraw()
-    }
+    postcodes (ps)    { this.redraw(); this.$ls.set('postcodes', ps) },
+    radius (r)        { this.redraw(); this.$ls.set('radius', r) },
+    maxIntensity (mi) { this.redraw(); this.$ls.set('maxIntensity', mi) }
   },
   methods: {
     redraw () {
-      for (let m of this.markers) {
-        m.setMap(null)
-      }
-      this.markers = []
-      for (let ll of this.latlngs) {
-        let marker = new google.maps.Marker({
-          position: {lat: ll[0], lng: ll[1]},
-          map: this.map
-        })
-        this.markers.push(marker)
-      }
+      let oldmap = this.heatmap
+      // create a fresh one
+      this.heatmap = new google.maps.visualization.HeatmapLayer({
+        data: this.latlngs,
+        radius: this.radius,
+        maxIntensity: this.maxIntensity,
+        dissipating: true
+      })
+      this.heatmap.setMap(this.map)
+      // remove the old one from the map
+      if (oldmap) oldmap.setMap(null)
+    },
+    reset: function () {
+      this.postcodes = ""
+      this.radius = 30
+      this.maxIntensity = 0
     }
   },
   mounted () {
@@ -58,13 +79,32 @@ export default {
       center: new google.maps.LatLng(53.8, -1.55)
     }
     this.map = new google.maps.Map(element, options)
+    this.redraw()
   }
 }
 </script>
 
 <style lang="scss">
-textarea#entry {
-  height: calc(100vh - 9em);
-  width: 100%;
+#postcodemap {
+  #sliders {
+    display: flex;
+    justify-content: space-around;
+    .slider {
+      width: 50%;
+      padding: 0.5em;
+      input {
+        width: 10em;
+      }
+    }
+  }
+  textarea#entry {
+    margin: 0 0 1em 0;
+    height: calc(100vh - 19em);
+    width: 100%;
+  }
+  #buttons {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="map-outer" class="leftright">
+  <div id="wardmap" class="leftright">
     <div id="map" class="left">
     </div>
     <div id="controls" class="right">
@@ -9,16 +9,17 @@
         <label :for="`input-${index}`">{{name}}</label>
         <input :id="`input-${index}`" v-model="wardvals[name]">
       </div>
-      <button disabled v-if="downloading" class="button">Downloading...</button>
-      <button v-on:click="saveImage" v-else class="button button-primary">Save map as image</button>
-      <button v-on:click="resetVals" class="button">Reset</button>
+      <div id="buttons">
+        <button disabled v-if="downloading" class="button">Downloading...</button>
+        <button v-on:click="saveImage" v-else class="button button-primary">Save map as image</button>
+        <button v-on:click="resetVals" class="button">Reset</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import tinycolor from 'tinycolor2'
-import html2canvas from 'html2canvas'
 import wardnames from '~/assets/wardnames.json'
 import Nav from '~/components/Nav.vue'
 
@@ -67,19 +68,6 @@ export default {
     },
     resetVals: function () {
       Object.keys(this.wardvals).forEach(key => this.wardvals[key] = 0)
-    },
-    saveImage: function () {
-      this.downloading = true
-      html2canvas(document.getElementById('map').querySelector('.gm-style > div:first-child'), {useCORS: true}).then(canvas => {
-        var image = canvas.toDataURL('image/png')
-        var link = document.createElement('a')
-        link.download = 'map.png'
-        link.href = image
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        this.downloading = false
-      })
     }
   },
   mounted () {
@@ -103,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss">
-#map-outer {
+#wardmap {
   #controls {
     label {
       display: inline-block;
@@ -114,8 +102,9 @@ export default {
     input {
       width: 3em;
     }
-    button {
-      margin: 0.5em;
+    #buttons {
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

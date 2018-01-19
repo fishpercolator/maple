@@ -20,7 +20,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBW4M9IBxxH8OefklPBYgOMrxTHiBeZzlY' }
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBW4M9IBxxH8OefklPBYgOMrxTHiBeZzlY&libraries=visualization' }
     ]
   },
   /*
@@ -45,6 +45,9 @@ module.exports = {
       }
     }
   },
-  plugins: ['~/plugins/localstorage.js'],
+  plugins: [
+    '~/plugins/localstorage.js',
+    '~/plugins/download_map.js'
+  ],
   ...routerBase
 }
