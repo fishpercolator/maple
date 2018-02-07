@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mapping tool for Leeds",
   "author": "Rich Daley <rich@fishpercolator.co.uk>",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
